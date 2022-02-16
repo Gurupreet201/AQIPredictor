@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- Map Box CDN -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="test.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <title>AQI</title>
+</head>
+
+<body>
+    <!--  ##############   Navbar Section ###############  -->
+    <!--  ##############   Navbar Section ###############  -->
+    <nav class="navbar" id="navbar">
+        <div class="flex items-center ml-10">
+            <span><i class="fas fa-wind text-2xl text-black mr-2"></i></span>
+            <a class="navbar_brand text-3xl href=" #">AQI</a>
+        </div>
+        <a href="#" id="toggle-button" class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="row" id="nav-items">
+            <div id="search">
+                <span class="search_icon"><i class="fas fa-search"></i></span>
+                <input type="search" placeholder="Search for any Location or Area" id="Search">
+                <span class="locate_icon"><i class="fas fa-map-marker-alt"></i></span>
+                <button class="button" id="submit">Search</button>
+            </div>
+            <ul id="nav-links">
+                <li><a class="hover_nav" href="index.html">Home</a></li>
+                <li><a class="hover_nav" href="dashboard.html">Dashboard</a></li>
+                <li><a class="hover_nav" href="about.html">About Us</a></li>
+                <li><a class="hover_nav" href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div id='map' class="map_dashboard"></div>
+
+    <div class="text-4xl font-semibold text-center mt-20" data-aos="fade-right">
+        <h1>India's Air Quality Index</h1>
+    </div>
+
+    <div class="dashboard_sec grid" id="grid">
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="200">
+            <h1 class="dashboard_head text-3xl my-4">A</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/ankleshwar.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ankleshwar</h1>
+                    <h1 class="text-md">(Gujarat)</h1>
+                </div>
+                <h1 class="aqi_value">52</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/ashok.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ashok Vihar</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">40</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/aurangabad.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Aurngabad</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">80</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/aizwal.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Aizawl</h1>
+                    <h1 class="text-md">(Mizoram)</h1>
+                </div>
+                <h1 class="aqi_value">113</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-270">
+            <h1 class="dashboard_head text-3xl my-4">B</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bahadurgarh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bahadurgarh</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">58</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/bandra.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bandra</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">61</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bhiwani.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bhiwani</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">92</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bagalkot.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bagalkot</h1>
+                    <h1 class="text-md">(Karnataka)</h1>
+                </div>
+                <h1 class="aqi_value">203</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bulandshr.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bulandshr</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">20</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Ballabgarh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ballabgarh</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">46</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bengaluru.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bengaluru</h1>
+                    <h1 class="text-md">(Karnataka)</h1>
+                </div>
+                <h1 class="aqi_value">95</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Bhiwadi.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Bhiwadi</h1>
+                    <h1 class="text-md">(Rajasthan)</h1>
+                </div>
+                <h1 class="aqi_value">300</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-1250">
+            <h1 class="dashboard_head text-3xl my-4">C</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/chennai.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Chennai</h1>
+                    <h1 class="text-md">(Karnataka)</h1>
+                </div>
+                <h1 class="aqi_value">10</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/chandrapur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Chandrapur</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">73</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/karnataka1.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Chikkaballapur</h1>
+                    <h1 class="text-md">(Karnataka)</h1>
+                </div>
+                <h1 class="aqi_value">89</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/karnataka2.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Chikkamagaluru</h1>
+                    <h1 class="text-md">(Karnataka)</h1>
+                </div>
+                <h1 class="aqi_value">250</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/chandigarh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Chandigarh</h1>
+                    <h1 class="text-md">(Punjab)</h1>
+                </div>
+                <h1 class="aqi_value">32</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/coimbatore.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Coimbatore</h1>
+                    <h1 class="text-md">(Tamil Nadu)</h1>
+                </div>
+                <h1 class="aqi_value">46</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Charki Dadri.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Charki Dadri</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">95</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/csi.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">C.S.I Airport</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">213</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-2100">
+            <h1 class="dashboard_head text-3xl my-4">D</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/delhi_dash.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Delhi</h1>
+                    <h1 class="text-md">(India)</h1>
+                </div>
+                <h1 class="aqi_value">39</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Dharuhera.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Dharuhera</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">87</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/dilshad garden.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Dilshad Garden</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">132</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/dwarka.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Dwarka</h1>
+                    <h1 class="text-md">(Gujarat)</h1>
+                </div>
+                <h1 class="aqi_value">321</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-2200">
+            <h1 class="dashboard_head text-3xl my-4">G</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/gaya.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Gaya</h1>
+                    <h1 class="text-md">(Bihar)</h1>
+                </div>
+                <h1 class="aqi_value">10</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/gurugram.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Gurugram</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">73</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/ghaziabad.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ghaziabad</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">89</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Guwahati.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Guwahati</h1>
+                    <h1 class="text-md">(Assam)</h1>
+                </div>
+                <h1 class="aqi_value">250</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/gomti nagar.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Gomti Nagar</h1>
+                    <h1 class="text-md">(Lucknow)</h1>
+                </div>
+                <h1 class="aqi_value">32</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Govindgarh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Govindgarh</h1>
+                    <h1 class="text-md">(Madhya Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">46</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-2800">
+            <h1 class="dashboard_head text-3xl my-4">H</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/howrah.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Howrah</h1>
+                    <h1 class="text-md">(West Bengal)</h1>
+                </div>
+                <h1 class="aqi_value">120</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Hajipur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Hajipur</h1>
+                    <h1 class="text-md">(Bihar)</h1>
+                </div>
+                <h1 class="aqi_value">71</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Hisar.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Hisar</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">450</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Hyderabad_dash.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Hyderabad</h1>
+                    <h1 class="text-md">(Telangana)</h1>
+                </div>
+                <h1 class="aqi_value">165</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-3500">
+            <h1 class="dashboard_head text-3xl my-4">I</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Indore.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Indore</h1>
+                    <h1 class="text-md">(Madhya Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">120</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-3500">
+            <h1 class="dashboard_head text-3xl my-4">J</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Jind.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Jind</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">111</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Jadavpur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Jadavpur</h1>
+                    <h1 class="text-md">(Kolkata)</h1>
+                </div>
+                <h1 class="aqi_value">52</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Jahangirpuri.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Jahangirpuri</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">223</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Jns.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">J.N.S</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">264</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Jabalpur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Jabalpur</h1>
+                    <h1 class="text-md">(Madhya Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">174</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-4000">
+            <h1 class="dashboard_head text-3xl my-4">K</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/kolkata.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kolkata</h1>
+                    <h1 class="text-md">(West Bengal)</h1>
+                </div>
+                <h1 class="aqi_value">10</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/kota.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kota</h1>
+                    <h1 class="text-md">(Rajasthan)</h1>
+                </div>
+                <h1 class="aqi_value">73</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/mumbai3.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kalyan</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">89</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Kurukshetra.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kurukshetra</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">250</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/mumbai2.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kurla</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">32</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Kochi.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kochi</h1>
+                    <h1 class="text-md">(Kerela)</h1>
+                </div>
+                <h1 class="aqi_value">46</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Kaithal.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kaithal</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">95</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Kannur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Kannur</h1>
+                    <h1 class="text-md">(Kerela)</h1>
+                </div>
+                <h1 class="aqi_value">213</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-5000">
+            <h1 class="dashboard_head text-3xl my-4">L</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Lucknow.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Lucknow</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">210</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Ludhiana.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ludhiana</h1>
+                    <h1 class="text-md">(Punjab)</h1>
+                </div>
+                <h1 class="aqi_value">150</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Lalbagh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Lalbagh</h1>
+                    <h1 class="text-md">(Lucknow)</h1>
+                </div>
+                <h1 class="aqi_value">45</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-5100">
+            <h1 class="dashboard_head text-3xl my-4">M</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/mumbai.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Mumbai</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">145</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Mandikhera.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Mandikhera</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">200</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Meerut.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Meerut</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">42</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Muzaffarpur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Muzaffarpur</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">53</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-5500">
+            <h1 class="dashboard_head text-3xl my-4">N</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Nashik.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Nashik</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">55</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Navi Mumbai.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Navi Mumbai</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">205</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Nehru Nagar.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Nehru Nagar</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">74</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-5700">
+            <h1 class="dashboard_head text-3xl my-4">P</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Patna.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Patna</h1>
+                    <h1 class="text-md">(Bihar)</h1>
+                </div>
+                <h1 class="aqi_value">10</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/pc.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">P.C.</h1>
+                    <h1 class="text-md">(Patna)</h1>
+                </div>
+                <h1 class="aqi_value">73</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/hyderabad.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Pashamylaram</h1>
+                    <h1 class="text-md">(Hyderabad)</h1>
+                </div>
+                <h1 class="aqi_value">89</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/pusa.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Pusa</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">250</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Padmapurkur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Padmapurkur</h1>
+                    <h1 class="text-md">(Howrah)</h1>
+                </div>
+                <h1 class="aqi_value">32</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/mumbai.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Powai</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">46</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Pune.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Pune</h1>
+                    <h1 class="text-md">(Maharashtra)</h1>
+                </div>
+                <h1 class="aqi_value">95</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Panchkula.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Panchkula</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">213</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Patiala.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Patiala</h1>
+                    <h1 class="text-md">(Punjab)</h1>
+                </div>
+                <h1 class="aqi_value">180</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Panipat.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Panipat</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">105</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Palwal.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Palwal</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">250</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-6900">
+            <h1 class="dashboard_head text-3xl my-4">R</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Rajamahendravaram.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-md">Rajamahendravaram</h1>
+                    <h1 class="text-md">(Andra Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">145</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Rabindra Sarobar.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Rabindra Sarobar</h1>
+                    <h1 class="text-md">(Kolkata)</h1>
+                </div>
+                <h1 class="aqi_value">200</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/rbu.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">R.B.U.</h1>
+                    <h1 class="text-md">(Kolkata)</h1>
+                </div>
+                <h1 class="aqi_value">42</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/rk.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">R K Puran</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">53</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Rohini.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Rohini</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">102</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-7600">
+            <h1 class="dashboard_head text-3xl my-4">S</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Panchkula.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Shillong</h1>
+                    <h1 class="text-md">(Meghalaya)</h1>
+                </div>
+                <h1 class="aqi_value">55</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Patna.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Shikarpur</h1>
+                    <h1 class="text-md">(Patna)</h1>
+                </div>
+                <h1 class="aqi_value">205</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Panipat.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Sirsa</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">74</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-7900">
+            <h1 class="dashboard_head text-3xl my-4">T</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Kannur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Thiruvananthapuram</h1>
+                    <h1 class="text-md">(kerela)</h1>
+                </div>
+                <h1 class="aqi_value">405</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/odisha.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Talcher</h1>
+                    <h1 class="text-md">(Odisha)</h1>
+                </div>
+                <h1 class="aqi_value">25</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/andra pradesh.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Tirupati</h1>
+                    <h1 class="text-md">(Andra Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">87</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Lucknow.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">T.D.I</h1>
+                    <h1 class="text-md">(Lucknow)</h1>
+                </div>
+                <h1 class="aqi_value">74</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-8300">
+            <h1 class="dashboard_head text-3xl my-4">U</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/udaipur.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Udaipur</h1>
+                    <h1 class="text-md">(Rajasthan)</h1>
+                </div>
+                <h1 class="aqi_value">405</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Ujjain.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Ujjain</h1>
+                    <h1 class="text-md">(Madhya Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">25</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-8300">
+            <h1 class="dashboard_head text-3xl my-4">V</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/chennai.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Velachery</h1>
+                    <h1 class="text-md">(Chennai)</h1>
+                </div>
+                <h1 class="aqi_value">65</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/kolkata.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Victoria</h1>
+                    <h1 class="text-md">(Kolkata)</h1>
+                </div>
+                <h1 class="aqi_value">25</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/gurugram.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Vikas Sadan</h1>
+                    <h1 class="text-md">(Gurugram)</h1>
+                </div>
+                <h1 class="aqi_value">89</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/mumbai3.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Vasai West</h1>
+                    <h1 class="text-md">(Mumbai)</h1>
+                </div>
+                <h1 class="aqi_value">200</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/Meerut.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Varanasi</h1>
+                    <h1 class="text-md">(Uttar Pradesh)</h1>
+                </div>
+                <h1 class="aqi_value">149</h1>
+            </div>
+            <div class="dashboard_city">
+                <img src="../images/cities/dilshad garden.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Vivek Vihar</h1>
+                    <h1 class="text-md">(Delhi)</h1>
+                </div>
+                <h1 class="aqi_value">75</h1>
+            </div>
+        </div>
+        <div class="dashboard_card" data-aos="fade-up" data-aos-offset="-9000">
+            <h1 class="dashboard_head text-3xl my-4">Y</h1>
+            <div class="dashboard_city">
+                <img src="../images/cities/Charki Dadri.jpg" class="w-12" alt="">
+                <div class="city_text">
+                    <h1 class="text-lg">Yamuna Nagar</h1>
+                    <h1 class="text-md">(Haryana)</h1>
+                </div>
+                <h1 class="aqi_value">65</h1>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mt-52">
+        <div class="w-100 md:h-80  flex md:flex-row flex-col justify-between
+    " style="background: #141414;">
+            <div
+                class="container flex flex-col justify-center items-center bg-red-500 h-100 max-w-sm md:mx-16 md:py-20 md:px-9 px-6 py-10">
+                <h1 class="text-white md:text-4xl text-3xl mb-4 font-bold text-center">
+                    <i class="fas fa-wind text-white mr-2"></i>AQI
+                </h1>
+                <p class="text-center my-3 text-white">Think of the AQI as a yardstick that runs from 0 to 500. The
+                    higher the
+                    AQI value, the greater the level of air pollution and the greater the health concern.</p>
+            </div>
+            <div class="text-white pt-10 pb-4 md:pb-0 md:text-left text-center px-8 md:px-0">
+                <h1 class="text-2xl font-semibold mb-5">Get in Touch</h1>
+                <div class="flex mb-2">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <h5 class="ml-2">AB Rd, Pigdamber, Rau, Indore</h5>
+                </div>
+                <div class="flex mb-2">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <h5 class="ml-2">
+                        +91<span class="ml-1">9857412369
+                    </h5>
+                </div>
+                <div class="flex mb-2 ">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+                    </svg>
+                    <h5 class="ml-2">info@gmail.com</h5>
+                </div>
+                <div class="flex justify-center md:justify-start mt-6">
+                    <div href="#" class="btn_footer px-1.5 py-1"><i class="fab fa-twitter"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-facebook-f"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-linkedin-in"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+            <div class="text-white pt-10 px-8 pb-8 md:pb-0 md:px-0" style="width: 350px;">
+                <h1 class="text-2xl text-center md:text-left mb-5">Quick Links</h1>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Home</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Dashboard</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> About Us</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ######## AOS Data ######## -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+        });
+    </script>
+
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <!-- Map Script -->
+    <script src="map_script.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

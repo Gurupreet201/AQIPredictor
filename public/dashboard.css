@@ -1,0 +1,63 @@
+.dashboard_sec {
+    width: 88%;
+    margin: 50px auto;
+}
+
+.dashboard_card {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #edeff0;
+    box-shadow: -10px -10px 20px 5px #f5f5f5, 10px 10px 20px #bbc3cc;
+    padding: 25px 50px;
+    border-radius: 80px;
+    margin: 30px 0px;
+}
+
+.dashboard_city {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 350px;
+    background-color: #edeff0;
+    box-shadow: -10px -10px 20px 5px #f5f5f5, 10px 10px 20px #bbc3cc;
+    padding: 20px 30px;
+    border-radius: 100px;
+    margin: 12px 0px;
+}
+
+.dashboard_city img {
+    border-radius: 40px;
+}
+
+.city_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.aqi_value {
+    background-color: #f03737;
+    color: #edeff0;
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+
+@media (max-width: 700px) {
+    .dashboard_sec {
+        width: 70%;
+        margin: 50px 0px;
+    }
+
+    .dashboard_card {
+        width: 350px;
+    }
+
+    .dashboard_city {
+        width: 320px;
+        padding: 15px 20px;
+    }
+}

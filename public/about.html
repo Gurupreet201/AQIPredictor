@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <!-- Map Box CDN -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="test.css" />
+    <title>AQI</title>
+</head>
+
+<body>
+    <!--  ##############   Navbar Section ###############  -->
+    <nav class="navbar" id="navbar">
+        <div class="flex items-center ml-10">
+            <span><i class="fas fa-wind text-2xl text-black mr-2"></i></span>
+            <a class="navbar_brand text-3xl href=" #">AQI</a>
+        </div>
+        <a href="#" id="toggle-button" class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="row" id="nav-items">
+            <div id="search">
+                <span class="search_icon"><i class="fas fa-search"></i></span>
+                <input type="search" placeholder="Search for any Location or Area" id="Search">
+                <span class="locate_icon"><i class="fas fa-map-marker-alt"></i></span>
+                <button class="button" id="submit">Search</button>
+            </div>
+            <ul id="nav-links">
+                <li><a class="hover_nav" href="index.html">Home</a></li>
+                <li><a class="hover_nav" href="dashboard.html">Dashboard</a></li>
+                <li><a class="hover_nav" href="about.html">About Us</a></li>
+                <li><a class="hover_nav" href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <div class="about_header">
+        <h1 class="text-center font-semibold md:text-6xl text-4xl mb-3" data-aos="fade-right">
+            About Us
+        </h1>
+        <div class="flex items-center" data-aos="fade-left">
+            <h4 class=" mr-2">Home</h4>
+            <i class="far fa-circle mr-2 "></i>
+            <h4 class="">About Us</h4>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="about_sec" data-aos="fade-up">
+        <div class="about_text">
+            <h1 class="md:text-4xl text-3xl text-red-400 md:text-left text-center font-semibold">AQI Application</h1>
+            <p class="mt-4">Now a days pollution is increasing everywhere and it is important for all people to know the
+                aqi of there city or respected places where they are living. Our application tells them the realtime
+                predicted api of the citys on just one click.</p>
+        </div>
+        <div class="about_img">
+            <img src="../images/about_sec.jpg" class="rounded-full w-100" alt="">
+        </div>
+    </div>
+    <div class="team_sec" data-aos="fade-up">
+        <div class="flex flex-col justify-center w-100 mb-10">
+            <h4 class="uppercase text-red-400 font-semibold text-xl my-2 text-center">TEAM MEMBERS</h4>
+            <h1 class="md:text-4xl text-3xl font-bold text-center">Designers and Makers of the Application</h1>
+        </div>
+        <div class="my-20 md:mx-16 grid md:grid-cols-3 gap-10">
+            <div style="background: #ffedea; position: relative;" class="rounded-3x team-item">
+                <div>
+                    <div style="position: relative; overflow: hidden;" class="team-img ">
+                        <img src="../images/team-1.jpg" class="w-100 rounded-t-2xl rounded-b-sm" alt="">
+                        <div class="team-social">
+                            <a href="#" class="btn_members px-1.5 py-1"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/nimishn.pandey" class="btn_members px-2 py-1"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/nimish-pandey-4662ab198"
+                                class="btn_members px-2 py-1"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/nimixh_79/" class="btn_members px-2 py-1"><i
+                                    class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="text-2xl text-red-400 font-medium my-2 text-center">Nimish Pandey</h4>
+                        <h4 class="my-2 text-center">MACHINE LEARNING</h4>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #ffedea;" class="rounded-3xl team-item">
+                <div>
+                    <div style="position: relative; overflow: hidden;" class="team-img ">
+                        <img src="../images/team-2.jpg" class="w-100 rounded-t-2xl rounded-b-sm" alt="">
+                        <div class="team-social">
+                            <a href="https://twitter.com/gurupreet_arora" class="btn_members px-1.5 py-1"><i
+                                    class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/gurupreetsingh.arora" class="btn_members px-2 py-1"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/gurupreet-singh-959390193/"
+                                class="btn_members px-2 py-1"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/gurupreet_singh_12/" class="btn_members px-2 py-1"><i
+                                    class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="text-2xl text-red-400 font-medium my-2 text-center">Gurupreet Singh</h4>
+                        <h4 class="my-2 text-center">FRONTEND DEVELOPER</h4>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #ffedea;" class="rounded-3xl team-item">
+                <div>
+                    <div style="position: relative; overflow: hidden;" class="team-img ">
+                        <img src="../images/team-3.jpg" class="w-100 rounded-t-2xl rounded-b-sm" alt="">
+                        <div class="team-social">
+                            <a href="#" class="btn_members px-1.5 py-1"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="btn_members px-2 py-1"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/rohit-mangwani-8a96246a"
+                                class="btn_members px-2 py-1"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/__rohit786_/" class="btn_members px-2 py-1"><i
+                                    class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-3">
+                        <h4 class="text-2xl text-red-400 font-medium my-2 text-center">Rohit Mangwani</h4>
+                        <h4 class="my-2 text-center">BACKEND DEVELOPER</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-52">
+        <div class="w-100 md:h-80  flex md:flex-row flex-col justify-between
+    " style="background: #141414;">
+            <div
+                class="container flex flex-col justify-center items-center bg-red-500 h-100 max-w-sm md:mx-16 md:py-20 md:px-9 px-6 py-10">
+                <h1 class="text-white md:text-4xl text-3xl mb-4 font-bold text-center">
+                    <i class="fas fa-wind text-white mr-2"></i>AQI
+                </h1>
+                <p class="text-center my-3 text-white">Think of the AQI as a yardstick that runs from 0 to 500. The
+                    higher the
+                    AQI value, the greater the level of air pollution and the greater the health concern.</p>
+            </div>
+            <div class="text-white pt-10 pb-4 md:pb-0 md:text-left text-center px-8 md:px-0">
+                <h1 class="text-2xl font-semibold mb-5">Get in Touch</h1>
+                <div class="flex mb-2">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <h5 class="ml-2">AB Rd, Pigdamber, Rau, Indore</h5>
+                </div>
+                <div class="flex mb-2">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <h5 class="ml-2">
+                        +91<span class="ml-1">9857412369
+                    </h5>
+                </div>
+                <div class="flex mb-2 ">
+                    <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+                    </svg>
+                    <h5 class="ml-2">info@gmail.com</h5>
+                </div>
+                <div class="flex justify-center md:justify-start mt-6">
+                    <div href="#" class="btn_footer px-1.5 py-1"><i class="fab fa-twitter"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-facebook-f"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-linkedin-in"></i></div>
+                    <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+            <div class="text-white pt-10 px-8 pb-8 md:pb-0 md:px-0" style="width: 350px;">
+                <h1 class="text-2xl text-center md:text-left mb-5">Quick Links</h1>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Home</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Dashboard</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> About Us</a>
+                <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ######## AOS Data ######## -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 200,
+            duration: 800,
+        });
+    </script>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>

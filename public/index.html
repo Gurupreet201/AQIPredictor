@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <!-- Map Box CDN -->
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
+  <!-- Chart -->
+  <script src="../node_modules/chart.js/dist/chart.js"></script>
+
+  <!-- Swiper -->
+  <link rel="styl.esheet" href="../node_modules/swiper/swiper.min.css">
+  <link rel="stylesheet" href="../node_modules/swiper/swiper-bundle.css">
+  <!-- Swiper -->
+  <script src="../node_modules/swiper/swiper-bundle.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="test.css" />
+  <title>AQI</title>
+</head>
+
+<body>
+  <!--  ##############   Navbar Section ###############  -->
+  <nav class="navbar" id="navbar">
+    <div class="flex items-center ml-10">
+      <span><i class="fas fa-wind text-2xl text-black mr-2"></i></span>
+      <a class="navbar_brand text-3xl href=" #">AQI</a>
+    </div>
+    <a href="#" id="toggle-button" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+    <div class="row" id="nav-items">
+      <div id="search">
+        <span class="search_icon"><i class="fas fa-search"></i></span>
+        <input type="search" placeholder="Search for any Location or Area" id="Search">
+        <span class="locate_icon"><i class="fas fa-map-marker-alt"></i></span>
+        <button class="button" id="submit">Search</button>
+      </div>
+      <ul id="nav-links">
+        <li><a class="hover_nav" href="index.html">Home</a></li>
+        <li><a class="hover_nav" href="dashboard.html">Dashboard</a></li>
+        <li><a class="hover_nav" href="about.html">About Us</a></li>
+        <li><a class="hover_nav" href="contact.html">Contact Us</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div id='map' class="map_home"></div>
+
+  <!-- City Information -->
+  <div class="sec-2">
+    <div class="weather_sec px-6 sm:py-6 py-10" data-aos="fade-right">
+      <div class="sm:w-36 w-28 m-auto my-4 weather_image">
+        <img src="../images/cloudy.jpg" class="rounded-full" id="img" alt="">
+      </div>
+      <div class="font-semibold my-1">
+        <h2 class="sm:text-4xl text-3xl weather_head">Weather</h2>
+      </div>
+      <div class="my-6">
+        <div class="sm:text-6xl text-5xl font-semibold my-2" id="temp">41&deg;C</div>
+        <div class="my-1 mt-6 text-sm sm:text-md font-medium" id="min-max">32&deg;C (min) / 35&deg;C (max)</div>
+        <div class="my-1 mt-2 text-sm sm:text-md font-medium" id="weather">Clouds</div>
+      </div>
+      <div class="my-4">
+        <h3 class="text-sm sm:text-lg font-medium" id="city">Ratlam</h3>
+        <div class="text-sm sm:text-lg font-medium" id="date">10 June (Wednesday), 2020</div>
+      </div>
+    </div>
+    <div class="flex flex-col api_width" data-aos="fade-left">
+      <div class="api_sec">
+        <div class="api_head px-8 py-12 sm:py-5">
+          <canvas id="canvas" width="150" height="150"></canvas>
+          <div class="ml-6 mt-6 sm:mt-0 text-sm sm:">
+            <h1 class="text-2xl sm:text-4xl mb-2 font-semibold weather_head" id="city_name">Ratlam</h1>
+            <p class="text-md sm:text-lg" id="wikiText">Mumbai also known as Bombay is the capital city of the Indian
+              state of Maharashtra. According to the United Nations, as of 2018, Mumbai is the second-most populous city
+              in the country after Delhi.</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col mt-10 px-8 sm:py-8 py-12  health_sec" data-aos="fade-left">
+        <h1 class="text-center text-2xl sm:text-3xl font-semibold weather_head">Health Advice</h1>
+        <p class="text-center text-sm sm:text-lg my-3" id="health_city_name">How to protect yourself from air pollution
+          around Ratlam?</p>
+        <div class="flex flex-col md:flex-row justify-around items-center mt-4">
+          <div class="flex flex-col items-center">
+            <div class="cross_mask" id="mask">
+              <img src="../images/mask.png" class="w-14" alt="">
+            </div>
+            <h1 class="text-center sm:text-sm mt-2">Wear Mask</h1>
+            <h1 class="text-center sm:text-sm" id="mask_text">Not Required</h1>
+          </div>
+          <div class="flex flex-col items-center mt-6 md:mt-0">
+            <div class="cross_ball" id="ball">
+              <img src="../images/football-player.png" class="w-14" alt="">
+            </div>
+            <h1 class="text-center sm:text-sm mt-2">Stay Indoor</h1>
+            <h1 class="text-center sm:text-sm" id="ball_text">Not Required</h1>
+          </div>
+          <div class="flex flex-col items-center mt-6 md:mt-0">
+            <div class="cross_window" id="window">
+              <img src="../images/window.png" class="w-14" alt="">
+            </div>
+            <h1 class="text-center sm:text-sm mt-2">Window</h1>
+            <h1 class="text-center sm:text-sm" id="window_text">Open Door</h1>
+          </div>
+          <div class="flex flex-col items-center mt-6 md:mt-0">
+            <div class="cross_air" id="air">
+              <img src="../images/air-filter.png" class="w-14" alt="">
+            </div>
+            <h1 class="text-center sm:text-sm mt-2">Use Purifier</h1>
+            <h1 class="text-center sm:text-sm" id="air_text">Not Required</h1>
+          </div>
+          <div class="flex flex-col items-center mt-6 md:mt-0">
+            <div class="cross_family" id="family">
+              <img src="../images/family.png" class="w-14" alt="">
+            </div>
+            <h1 class="text-center sm:text-sm mt-2">Family</h1>
+            <h1 class="text-center sm:text-sm" id="family_text">Can go Outdoor</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="Chart" data-aos="fade-up">
+      <canvas id="myChart" height="100" width="300"></canvas>
+    </div>
+  </section>
+
+  <!-- Slider main container -->
+  <div class="swiper">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(../images/slider-1.jpg); background-position: center;
+      background-size: cover;">
+        <div class="swiper-inner">
+          <h1 class="md:text-3xl text-2xl my-4 text-black">What is Aqi</h1>
+          <p class="md:text-xl text-sm my-4 text-black">An Air Quality Index (AQI) is used by government agencies to
+            communicate
+            to
+            the public how polluted the air
+            currently is or how polluted it is forecast to become. Public health risks increase as the AQI rises.
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(../images/slider-2.jpg); background-position: center;
+      background-size: cover;">
+        <div class="swiper-inner">
+          <h1 class="md:text-3xl text-2xl my-4 text-black">Benefits of Aqi</h1>
+          <p class="md:text-xl text-sm my-4 text-black">The key benefit of using an AQI is the ability to communicated
+            data with
+            the public, both easily and conveniently. AQI can demystify data – you don’t need to be an expert to
+            understand AQI values – they’re easily scaled and colour coded – there is no need to understand units and
+            concentrations.
+          </p>
+        </div>
+      </div>
+      <div class="swiper-slide" style="background: linear-gradient(rgba(60,60,60,0.3),rgba(60,60,60,0.3)),url(../images/slider-3.jpg); background-position: bottom;
+      background-size: cover;">
+        <div class="swiper-inner">
+          <h1 class="md:text-3xl text-2xl my-4 text-black">Important Uses</h1>
+          <p class="md:text-xl text-sm my-4 text-black">The purpose of the AQI is to help people know how the local air
+            quality
+            impacts their health. The Environmental Protection Agency (EPA) calculates the AQI for five major air
+            pollutants, for which national air quality standards have been established to safeguard public health.
+          </p>
+        </div>
+      </div>
+      ...
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+
+    <!-- If we need navigation buttons -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      // Optional parameters
+
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // And if we need scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    });
+  </script>
+
+  <!-- Table Section -->
+  <div class="table-sec" data-aos="fade-up">
+    <div class="flex flex-col justify-between items-center">
+      <h1 class="text-3xl text-red-400 my-3">REAL-TIME AIR QUALITY INDEX (AQI)</h1>
+      <p class="text-lg">Explore the real-time air quality - PM2.5, PM10, CO, Ozone, SO2 & NO2 data from AQI ambient air
+        quality
+        monitors</p>
+    </div>
+    <table class="content_table">
+      <thead>
+        <tr>
+          <th>BIG CITIES</th>
+          <th>AQI</th>
+          <th>PM2.5</th>
+          <th>PM10</th>
+          <th>Ozone</th>
+          <th>CO</th>
+          <th>SO2</th>
+          <th>NO2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/delhi.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">New Delhi</h1>
+            </div>
+          </td>
+          <td>370</td>
+          <td>190</td>
+          <td>291</td>
+          <td>4</td>
+          <td>2</td>
+          <td>5</td>
+          <td>35</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/ahemdabad.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Ahemdabad</h1>
+            </div>
+          </td>
+          <td>348</td>
+          <td>180</td>
+          <td>205</td>
+          <td>2</td>
+          <td>2</td>
+          <td>9</td>
+          <td>117</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/banglore.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Bangalore</h1>
+            </div>
+          </td>
+          <td>31</td>
+          <td>16</td>
+          <td>26</td>
+          <td>6</td>
+          <td>1</td>
+          <td>2</td>
+          <td>9</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images//mumbai.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Mumbai</h1>
+            </div>
+          </td>
+          <td>154</td>
+          <td>70</td>
+          <td>134</td>
+          <td>12</td>
+          <td>1</td>
+          <td>3</td>
+          <td>15</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/kolkata.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Kolkata</h1>
+            </div>
+          </td>
+          <td>35</td>
+          <td>13</td>
+          <td>32</td>
+          <td>7</td>
+          <td>5</td>
+          <td>1</td>
+          <td>6</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/hyderabad.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Hyderabad</h1>
+            </div>
+          </td>
+          <td>54</td>
+          <td>32</td>
+          <td>11</td>
+          <td>2</td>
+          <td>5</td>
+          <td>1</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="flex items-center">
+              <img src="../images/indore.jpg" class="w-10 rounded-full" alt="">
+              <h1 class="text-md ml-2">Indore</h1>
+            </div>
+          </td>
+          <td>86</td>
+          <td>21</td>
+          <td>87</td>
+          <td>51</td>
+          <td>5</td>
+          <td>3</td>
+          <td>57</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- AQI Scale Section -->
+  <div class="scale_sec" data-aos="fade-up">
+    <h1 class="text-center text-red-400 md:text-4xl text-3xl my-4">Air Quality Index Scale</h1>
+    <p class="text-center md:text-lg text-md">Know about the category of air quality index (AQI) your ambient air falls
+      in and
+      what it
+      implies.</p>
+    <div class="flex md:flex-row flex-col mt-10">
+      <div class="flex flex-col">
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #71ad71;">
+          <img src="../images/aqi_50.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Good</h1>
+            <h1>0 - 50</h1>
+          </div>
+          <p class="width_scale_text">The air is fresh and free from toxins. People are not exposed to any health risk.
+          </p>
+        </div>
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #ed5f2b;">
+          <img src=" ../images/aqi_150.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Poor</h1>
+            <h1>101 - 200</h1>
+          </div>
+          <p class="width_scale_text">Inhaling such air can cause slight discomfort and difficulty in breathing.</p>
+        </div>
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #a34cd9;">
+          <img src=" ../images/aqi_300.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Severe</h1>
+            <h1>301 - 400</h1>
+          </div>
+          <p class="width_scale_text">Exposure to air can cause chronic morbidities or even organ impairment.</p>
+        </div>
+      </div>
+      <div>
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #eba934;">
+          <img src=" ../images/aqi_100.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Moderate</h1>
+            <h1>51 - 100</h1>
+          </div>
+          <p class="width_scale_text">Acceptable air quality for healthy adults but mild threat to sensitive
+            individuals.</p>
+        </div>
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #f74d4d;">
+          <img src=" ../images/aqi_200.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Unhealthy</h1>
+            <h1>201 - 300</h1>
+          </div>
+          <p class="width_scale_text">This could be typically problematic for children, pregnant women and the elderly.
+          </p>
+        </div>
+        <div class="flex lg:flex-row flex-col width_scale justify-between items-center scale_item"
+          style="background-color: #c22d2d;">
+          <img src=" ../images/aqi_500.jpg" class="w-20 rounded-full" alt="">
+          <div class="text-center mt-2">
+            <h1>Hazardous</h1>
+            <h1>401 - 500</h1>
+          </div>
+          <p class="width_scale_text">Beware! Your life is in danger. Prolonged exposure can lead to premature death.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-52">
+    <div class="w-100 md:h-80  flex md:flex-row flex-col justify-between
+" style="background: #141414;">
+      <div
+        class="container flex flex-col justify-center items-center bg-red-500 h-100 max-w-sm md:mx-16 md:py-20 md:px-9 px-6 py-10">
+        <h1 class="text-white md:text-4xl text-3xl mb-4 font-bold text-center">
+          <i class="fas fa-wind text-white mr-2"></i>AQI
+        </h1>
+        <p class="text-center my-3 text-white">Think of the AQI as a yardstick that runs from 0 to 500. The higher the
+          AQI value, the greater the level of air pollution and the greater the health concern.</p>
+      </div>
+      <div class="text-white pt-10 pb-4 md:pb-0 md:text-left text-center px-8 md:px-0">
+        <h1 class="text-2xl font-semibold mb-5">Get in Touch</h1>
+        <div class="flex mb-2">
+          <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <h5 class="ml-2">AB Rd, Pigdamber, Rau, Indore</h5>
+        </div>
+        <div class="flex mb-2">
+          <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+          </svg>
+          <h5 class="ml-2">
+            +91<span class="ml-1">9857412369
+          </h5>
+        </div>
+        <div class="flex mb-2 ">
+          <svg class="w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+          </svg>
+          <h5 class="ml-2">info@gmail.com</h5>
+        </div>
+        <div class="flex justify-center md:justify-start mt-6">
+          <div href="#" class="btn_footer px-1.5 py-1"><i class="fab fa-twitter"></i></div>
+          <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-facebook-f"></i></div>
+          <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-linkedin-in"></i></div>
+          <div href="#" class="btn_footer px-2 py-1"><i class="fab fa-instagram"></i></div>
+        </div>
+      </div>
+      <div class="text-white pt-10 px-8 pb-8 md:pb-0 md:px-0" style="width: 350px;">
+        <h1 class="text-2xl text-center md:text-left mb-5">Quick Links</h1>
+        <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Home</a>
+        <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Dashboard</a>
+        <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> About Us</a>
+        <a href="" class="mb-2 block"><i class="mr-1 text-red-500 fas fa-arrow-right"></i> Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    var chart = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(chart, {
+      type: 'line',
+      data: {
+        labels: ['Cities', 'R.K.Pura (Delhi)', 'Talcher', 'Ankleshwar', 'Rohini (Delhi)', 'Gaya', 'Chennai'],
+        datasets: [{
+          label: 'Higest A.Q.I Cities',
+          data: [, 192, 192, 190, 191, 190, 189],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: false,
+          }
+        }
+      }
+    });
+  </script>
+
+
+  <!-- ######## AOS Data ######## -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 300,
+      duration: 800,
+    });
+  </script>
+
+  <!-- Map Script -->
+  <script src="map_script.js"></script>
+  <script src="text.js"></script>
+  <!-- Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>
